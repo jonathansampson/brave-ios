@@ -1576,7 +1576,7 @@ class BrowserViewController: UIViewController {
             return
         }
         if NoImageModeHelper.isActivated {
-            webView.evaluateJavaScript("__firefox__.NoImageMode.setEnabled(true)", completionHandler: nil)
+            webView.evaluateSafeJavaScript(functionName: "__firefox__.NoImageMode.setEnabled", args: ["true"], completionHandler: nil)
         }
     }
 
