@@ -989,7 +989,6 @@
 		F91785DB255F38D6002976F2 /* WKWebViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91785DA255F38D6002976F2 /* WKWebViewExtensions.swift */; };
 		F919BFAC2584204900D94BA5 /* ContextMenu.js in Resources */ = {isa = PBXBuildFile; fileRef = D03F8F24200EACD8003C2224 /* ContextMenu.js */; };
 		F919BFB7258440C100D94BA5 /* AllFramesAtDocumentEndSandboxed.js in Resources */ = {isa = PBXBuildFile; fileRef = F919BFB6258440C100D94BA5 /* AllFramesAtDocumentEndSandboxed.js */; };
-		F91EAD57256C90720056C8CC /* BraveGetUA.js in Resources */ = {isa = PBXBuildFile; fileRef = F91EAD56256C90720056C8CC /* BraveGetUA.js */; };
 		F930CDAC227000F200A23FE1 /* U2F.js in Resources */ = {isa = PBXBuildFile; fileRef = F930CDAB227000F200A23FE1 /* U2F.js */; };
 		F930CDAE2270015C00A23FE1 /* U2FExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F930CDAD2270015C00A23FE1 /* U2FExtensions.swift */; };
 		F930CDB82270040D00A23FE1 /* WebAuthnClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F930CDB72270040D00A23FE1 /* WebAuthnClientData.swift */; };
@@ -4260,6 +4259,7 @@
 		D0FCF7EB1FE44DB6004A7995 /* AtDocumentEnd */ = {
 			isa = PBXGroup;
 			children = (
+				F9E0F3B3257878C1003A6A30 /* PrintHandler.js */,
 				D000661320472890009BA6F6 /* __firefox__.js */,
 				39F4C0F92045D87400746155 /* FocusHelper.js */,
 			);
@@ -4899,7 +4899,6 @@
 			children = (
 				D03F8F24200EACD8003C2224 /* ContextMenu.js */,
 				F9E0F3BE25787E2C003A6A30 /* __firefox__.js */,
-				F9E0F3B3257878C1003A6A30 /* PrintHandler.js */,
 			);
 			path = AtDocumentEnd;
 			sourceTree = "<group>";

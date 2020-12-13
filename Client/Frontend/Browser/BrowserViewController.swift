@@ -2498,7 +2498,7 @@ extension BrowserViewController: TabDelegate {
         tab.addContentScript(noImageModeHelper, name: NoImageModeHelper.name())
         
         let printHelper = PrintHelper(tab: tab)
-        tab.addContentScript(printHelper, name: PrintHelper.name())
+        tab.addContentScript(printHelper, name: PrintHelper.name(), sandboxed: false)
 
         let customSearchHelper = CustomSearchHelper(tab: tab)
         tab.addContentScript(customSearchHelper, name: CustomSearchHelper.name())
