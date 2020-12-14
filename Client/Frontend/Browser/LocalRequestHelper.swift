@@ -14,12 +14,13 @@ class LocalRequestHelper: TabContentScript {
         guard let params = message.body as? [String: String], message.frameInfo.request.url?.isLocal ?? false else {
             return
         }
+        
+        guard let token = params["securitytoken"], token == UserScriptManager.securityToken.uuidString else {
+                    print("Missing required security token.")
+                    return
+        }
 
-        if params["type"] == "load",
-           let urlString = params["url"],
-           let url = URL(string: urlString) {
-            _ = message.webView?.load(PrivilegedRequest(url: url) as URLRequest)
-        } else if params["type"] == "reload" {
+        if params["type"] == "reload" {
             _ = message.webView?.reload()
         } else {
             assertionFailure("Invalid message: \(message.body)")

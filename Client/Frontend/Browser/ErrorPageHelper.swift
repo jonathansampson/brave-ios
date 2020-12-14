@@ -161,7 +161,9 @@ class ErrorPageHelper {
                 "short_description": errDomain,
             ]
 
-            var actions = "<button onclick='webkit.messageHandlers.localRequestHelper.postMessage({ type: \"reload\" })'>\(Strings.errorPageReloadButtonTitle)</button>"
+            var actions = "<button onclick='webkit.messageHandlers.localRequestHelper.postMessage({" +
+                "securitytoken: \"\(UserScriptManager.securityToken.uuidString)\"," +
+                "type: \"reload\" })'>\(Strings.errorPageReloadButtonTitle)</button>"
 
             if errDomain == kCFErrorDomainCFNetwork as String {
                 if let code = CFNetworkErrors(rawValue: Int32(errCode)) {

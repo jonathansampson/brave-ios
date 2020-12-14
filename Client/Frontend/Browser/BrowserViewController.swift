@@ -1389,7 +1389,7 @@ class BrowserViewController: UIViewController {
                 return
             }
 
-            tab.loadRequest(PrivilegedRequest(url: url) as URLRequest)
+            tab.loadRequest(URLRequest(url: url))
         }
     }
 

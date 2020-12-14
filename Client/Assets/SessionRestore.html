@@ -43,7 +43,7 @@
       // For some reason (maybe a WebKit bug?), document.location still points to SessionRestore.html at this point,
       // so wait until the next tick when the location points to the correct index and URL.
       setTimeout(function () {
-          webkit.messageHandlers.localRequestHelper.postMessage({ type: "reload" });
+          webkit.messageHandlers.localRequestHelper.postMessage({securitytoken: SECURITY_TOKEN, type: "reload" });
           webkit.messageHandlers.sessionRestoreHelper.postMessage({ name: "didRestoreSession" });
       }, 0);
   }) ();
