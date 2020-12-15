@@ -2236,6 +2236,10 @@ extension BrowserViewController: TopToolbarDelegate {
     }
     
     func topToolbarDidTapBraveShieldsButton(_ topToolbar: TopToolbarView) {
+        presentBraveShieldsViewController()
+    }
+    
+    func presentBraveShieldsViewController() {
         guard let selectedTab = tabManager.selectedTab, var url = selectedTab.url else { return }
         if url.isErrorPageURL, let originalURL = url.originalURLFromErrorURL {
             url = originalURL
