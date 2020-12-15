@@ -231,7 +231,7 @@ class UserScriptManager {
         let token = UserScriptManager.securityToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
         alteredSource = alteredSource.replacingOccurrences(of: "$<windowRenderer>", with: "W\(token)", options: .literal)
         
-        return WKUserScript(source: alteredSource, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+        return WKUserScript.createInDefaultContentWorld(source: alteredSource, injectionTime: .atDocumentStart, forMainFrameOnly: false)
     }()
     
     private let FullscreenHelperScript: WKUserScript? = {
