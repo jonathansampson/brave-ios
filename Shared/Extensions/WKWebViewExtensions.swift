@@ -34,7 +34,7 @@ public extension WKWebView {
         return "\(functionName)(\(argsJS))"
     }
 
-    func evaluateSafeJavascript(functionName: String, args: [Any], sandboxed: Bool = true, escapeArgs: Bool = true, asFunction: Bool = true, completion: @escaping ((Any?, Error?) -> Void)) {
+    func evaluateSafeJavascript(functionName: String, args: [Any], sandboxed: Bool = true, escapeArgs: Bool = true, asFunction: Bool = true, completion: ((Any?, Error?) -> Void)?) {
         var javascript = functionName
         if asFunction {
             javascript = generateJavascriptFunctionString(functionName: functionName, args: args, escapeArgs: escapeArgs)
@@ -43,14 +43,20 @@ public extension WKWebView {
             evaluateJavaScript(javascript, in: nil, in: .defaultClient) { result  in
                 switch result {
                     case .success(let value):
-                        completion(value, nil)
+                        if let completionHandler = completion {
+                            completionHandler(value, nil)
+                        }
                     case .failure(let error):
-                        completion(nil, error)
+                        if let completionHandler = completion {
+                            completionHandler(nil, error)
+                        }
                 }
             }
         } else {
             evaluateJavaScript(javascript) { data, error  in
-                completion(data, error)
+                if let completionHandler = completion {
+                    completionHandler(data, error)
+                }
             }
         }
     }

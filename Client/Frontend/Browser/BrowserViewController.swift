@@ -1374,6 +1374,7 @@ class BrowserViewController: UIViewController {
             //Block all other contexts such as redirects, downloads, embed, linked, etc..
             if visitType == .bookmark {
                 if let webView = tab.webView, let code = url.bookmarkletCodeComponent {
+                    // This does not need the SafeJavascript wrapper since the bookmarklet code will be executed as is without the sandbox
                     webView.evaluateJavaScript(code, completionHandler: { _, error in
                         if let error = error {
                             log.error(error)
@@ -1821,7 +1822,7 @@ class BrowserViewController: UIViewController {
             findInPageBar.endEditing(true)
             let tab = tab ?? tabManager.selectedTab
             guard let webView = tab?.webView else { return }
-            webView.evaluateJavaScript("__firefox__.findDone()", completionHandler: nil)
+            webView.evaluateSafeJavascript(functionName: "__firefox__.findDone", args: [], completion: nil)
             findInPageBar.removeFromSuperview()
             self.findInPageBar = nil
             updateViewConstraints()
@@ -1845,7 +1846,7 @@ class BrowserViewController: UIViewController {
                 // because that event wil not always fire due to unreliable page caching. This will either let us know that
                 // the currently loaded page can be turned into reading mode or if the page already is in reading mode. We
                 // ignore the result because we are being called back asynchronous when the readermode status changes.
-                webView.evaluateJavaScript("\(ReaderModeNamespace).checkReadability()", completionHandler: nil)
+                webView.evaluateSafeJavascript(functionName: "\(ReaderModeNamespace).checkReadability", args: [], sandboxed: false, completion: nil)
 
                 // Re-run additional scripts in webView to extract updated favicons and metadata.
                 runScriptsOnWebView(webView)
@@ -2834,7 +2835,7 @@ extension BrowserViewController: WKUIDelegate {
                     window.alert=window.confirm=window.prompt=function(n){},
                     [].slice.apply(document.querySelectorAll('iframe')).forEach(function(n){if(n.contentWindow != window){n.contentWindow.alert=n.contentWindow.confirm=n.contentWindow.prompt=function(n){}}})
                     """
-        webView.evaluateJavaScript(script, completionHandler: nil)
+        webView.evaluateSafeJavascript(functionName: script, args: [], sandboxed: false, asFunction: false, completion: nil)
     }
     
     func handleAlert<T: JSAlertInfo>(webView: WKWebView, alert: inout T, completionHandler: @escaping () -> Void) {
@@ -3290,7 +3291,7 @@ extension BrowserViewController {
         guard let webView = tabManager.selectedTab?.webView else {
             return
         }
-        webView.evaluateJavaScript("__firefox__.searchQueryForField()") { (result, _) in
+        webView.evaluateSafeJavascript(functionName: "__firefox__.searchQueryForField", args: [], sandboxed: false, completion: { (result, _) in
             guard let searchQuery = result as? String, let favicon = self.tabManager.selectedTab!.displayFavicon else {
                 //Javascript responded with an incorrectly formatted message. Show an error.
                 let alert = ThirdPartySearchAlerts.failedToAddThirdPartySearch()
@@ -3300,7 +3301,7 @@ extension BrowserViewController {
             self.addSearchEngine(searchQuery, favicon: favicon)
             self.customSearchEngineButton.tintColor = UIColor.Photon.grey50
             self.customSearchEngineButton.isUserInteractionEnabled = false
-        }
+        })
     }
 
     func addSearchEngine(_ searchQuery: String, favicon: Favicon) {
@@ -3347,12 +3348,12 @@ extension BrowserViewController: KeyboardHelperDelegate {
         guard let webView = tabManager.selectedTab?.webView else {
             return
         }
-        webView.evaluateJavaScript("__firefox__.searchQueryForField()") { (result, _) in
+        webView.evaluateSafeJavascript(functionName: "__firefox__.searchQueryForField", args: [], sandboxed: false, completion: { (result, _) in
             guard let _ = result as? String else {
                 return
             }
             self.addCustomSearchButtonToWebView(webView)
-        }
+        })
     }
 
     func keyboardHelper(_ keyboardHelper: KeyboardHelper, keyboardDidShowWithState state: KeyboardState) {
@@ -3453,8 +3454,7 @@ extension BrowserViewController: FindInPageBarDelegate, FindInPageHelperDelegate
 
     fileprivate func find(_ text: String, function: String) {
         guard let webView = tabManager.selectedTab?.webView else { return }
-        let escaped = text.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\"")
-        webView.evaluateJavaScript("__firefox__.\(function)(\"\(escaped)\")", completionHandler: nil)
+        webView.evaluateSafeJavascript(functionName: "__firefox__.\(function)", args: [text], sandboxed: false, completion: nil)
     }
 
     func findInPageHelper(_ findInPageHelper: FindInPageHelper, didUpdateCurrentResult currentResult: Int) {
