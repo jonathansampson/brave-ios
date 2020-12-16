@@ -34,8 +34,11 @@ public extension WKWebView {
         return "\(functionName)(\(argsJS))"
     }
 
-    func evaluateSafeJavascript(functionName: String, args: [Any], sandboxed: Bool = true, escapeArgs: Bool = true, completion: @escaping ((Any?, Error?) -> Void)) {
-        let javascript = generateJavascriptFunctionString(functionName: functionName, args: args, escapeArgs: escapeArgs)
+    func evaluateSafeJavascript(functionName: String, args: [Any], sandboxed: Bool = true, escapeArgs: Bool = true, asFunction: Bool = true, completion: @escaping ((Any?, Error?) -> Void)) {
+        var javascript = functionName
+        if asFunction {
+            javascript = generateJavascriptFunctionString(functionName: functionName, args: args, escapeArgs: escapeArgs)
+        }
         if #available(iOS 14.0, *), sandboxed {
             evaluateJavaScript(javascript, in: nil, in: .defaultClient) { result  in
                 switch result {

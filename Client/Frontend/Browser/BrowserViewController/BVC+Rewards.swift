@@ -223,7 +223,7 @@ extension Tab {
         
         if shouldClassifyLoadsForAds {
             group.enter()
-            webView.evaluateJavaScript("document.body.innerText", completionHandler: { text, _ in
+            webView.evaluateSafeJavascript(functionName: "document.body.innerText", args: [], asFunction: false, completion: { text, _ in
                 // Get the list of words in the page and join them together with a space
                 // to send to the classifier
                 classifierText = (text as? String)?.words.joined(separator: " ")
