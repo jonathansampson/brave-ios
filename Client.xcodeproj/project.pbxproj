@@ -996,6 +996,8 @@
 		F930CDD12270F09000A23FE1 /* WebAuthnAuthenticateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F930CDD02270F09000A23FE1 /* WebAuthnAuthenticateRequest.swift */; };
 		F930CDD72270F14300A23FE1 /* WebAuthnUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F930CDD62270F14300A23FE1 /* WebAuthnUtils.swift */; };
 		F939FBFE22A596B900D9CD3F /* U2FTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F939FBFD22A596B900D9CD3F /* U2FTests.swift */; };
+		F9488EB32589899800A72C84 /* RewardsReporting.js in Resources */ = {isa = PBXBuildFile; fileRef = 276E7A2E22F21A7700939424 /* RewardsReporting.js */; };
+		F9488EC72589A93F00A72C84 /* AllFramesAtDocumentStartSandboxed.js in Resources */ = {isa = PBXBuildFile; fileRef = F9488EC62589A93F00A72C84 /* AllFramesAtDocumentStartSandboxed.js */; };
 		F98E1EA122B6D70E0018AF29 /* libYubiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC8E23A22A6C56D0064F3FA /* libYubiKit.a */; };
 		F99505FF22937E3900CC6543 /* U2F-low-level.js in Resources */ = {isa = PBXBuildFile; fileRef = F99505FE22937E3900CC6543 /* U2F-low-level.js */; };
 		F9B23EE223F61173000EB3D8 /* PaymentRequest.js in Resources */ = {isa = PBXBuildFile; fileRef = F9B23EE123F61173000EB3D8 /* PaymentRequest.js */; };
@@ -2463,7 +2465,7 @@
 		F84B21EF1A0910F600AAB793 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F84B22431A09165600AAB793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F91785DA255F38D6002976F2 /* WKWebViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewExtensions.swift; sourceTree = "<group>"; };
-		F919BFB6258440C100D94BA5 /* AllFramesAtDocumentEndSandboxed.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = AllFramesAtDocumentEndSandboxed.js; path = Client/Assets/AllFramesAtDocumentEndSandboxed.js; sourceTree = "<group>"; };
+		F919BFB6258440C100D94BA5 /* AllFramesAtDocumentEndSandboxed.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AllFramesAtDocumentEndSandboxed.js; sourceTree = "<group>"; };
 		F91EAD56256C90720056C8CC /* BraveGetUA.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = BraveGetUA.js; sourceTree = "<group>"; };
 		F926647A234D4EF400359492 /* CoreNFC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreNFC.framework; path = System/Library/Frameworks/CoreNFC.framework; sourceTree = SDKROOT; };
 		F930CDAB227000F200A23FE1 /* U2F.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = U2F.js; sourceTree = "<group>"; };
@@ -2473,6 +2475,7 @@
 		F930CDD02270F09000A23FE1 /* WebAuthnAuthenticateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthnAuthenticateRequest.swift; sourceTree = "<group>"; };
 		F930CDD62270F14300A23FE1 /* WebAuthnUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthnUtils.swift; sourceTree = "<group>"; };
 		F939FBFD22A596B900D9CD3F /* U2FTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = U2FTests.swift; sourceTree = "<group>"; };
+		F9488EC62589A93F00A72C84 /* AllFramesAtDocumentStartSandboxed.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AllFramesAtDocumentStartSandboxed.js; sourceTree = "<group>"; };
 		F9616E6A240EE43F00667C2D /* PaymentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequest.swift; sourceTree = "<group>"; };
 		F99505FE22937E3900CC6543 /* U2F-low-level.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "U2F-low-level.js"; sourceTree = "<group>"; };
 		F9B23EE123F61173000EB3D8 /* PaymentRequest.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PaymentRequest.js; sourceTree = "<group>"; };
@@ -4210,8 +4213,6 @@
 			isa = PBXGroup;
 			children = (
 				D0C95DF5200EADD500E4E51C /* LoginsHelper.js */,
-				2755AB7C23107BC600F0721F /* AdsReporting.js */,
-				276E7A2E22F21A7700939424 /* RewardsReporting.js */,
 				D03F8F20200EABB0003C2224 /* __firefox__.js */,
 				F9F8597B2533CEBC000CEB24 /* DownloadHelper.js */,
 			);
@@ -4646,7 +4647,6 @@
 		F84B21B51A090F8100AAB793 = {
 			isa = PBXGroup;
 			children = (
-				F919BFB6258440C100D94BA5 /* AllFramesAtDocumentEndSandboxed.js */,
 				0A60A1882358AF9E00953CA8 /* Brave.xctestplan */,
 				0A66550D23E9EA540047EF2A /* Brave_iPad.xctestplan */,
 				0A24F7DE233E8EF2004D2F3A /* Config */,
@@ -4790,7 +4790,9 @@
 			children = (
 				2765826D217130B700754B2F /* Certificates */,
 				D0FCF8031FE4772C004A7995 /* AllFramesAtDocumentEnd.js */,
+				F919BFB6258440C100D94BA5 /* AllFramesAtDocumentEndSandboxed.js */,
 				D03F8F22200EAC1E003C2224 /* AllFramesAtDocumentStart.js */,
+				F9488EC62589A93F00A72C84 /* AllFramesAtDocumentStartSandboxed.js */,
 				D0FCF8041FE4772D004A7995 /* MainFrameAtDocumentEnd.js */,
 				D0FCF8051FE4772D004A7995 /* MainFrameAtDocumentStart.js */,
 				5D21AE002303B70E00B30D97 /* Themes */,
@@ -4885,6 +4887,15 @@
 			path = WebAuthN;
 			sourceTree = "<group>";
 		};
+		F9488E9E2589895500A72C84 /* AtDocumentStart */ = {
+			isa = PBXGroup;
+			children = (
+				2755AB7C23107BC600F0721F /* AdsReporting.js */,
+				276E7A2E22F21A7700939424 /* RewardsReporting.js */,
+			);
+			path = AtDocumentStart;
+			sourceTree = "<group>";
+		};
 		F9838EF325797C530051FA21 /* Sandboxed */ = {
 			isa = PBXGroup;
 			children = (
@@ -4906,6 +4917,7 @@
 		F9838EF525797E1A0051FA21 /* AllFrames */ = {
 			isa = PBXGroup;
 			children = (
+				F9488E9E2589895500A72C84 /* AtDocumentStart */,
 				F9838EF425797C6D0051FA21 /* AtDocumentEnd */,
 			);
 			path = AllFrames;
@@ -5553,6 +5565,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9488EC72589A93F00A72C84 /* AllFramesAtDocumentStartSandboxed.js in Resources */,
 				F919BFB7258440C100D94BA5 /* AllFramesAtDocumentEndSandboxed.js in Resources */,
 				5E0FCD212342526700AC831E /* FullscreenHelper.js in Resources */,
 				D38A1EE01CB458EC0080C842 /* CertError.html in Resources */,
@@ -5601,6 +5614,7 @@
 				F9F859702533CE52000CEB24 /* LoginsHelper.js in Resources */,
 				27F56F8D24E447020018F2F9 /* DateTools.bundle in Resources */,
 				0AB22A95257EADA900126ADC /* corwin-prescott_beach.jpg in Resources */,
+				F9488EB32589899800A72C84 /* RewardsReporting.js in Resources */,
 				27658271217130D900754B2F /* GlobalSign_r1.cer in Resources */,
 				39F4C0FA2045D87400746155 /* FocusHelper.js in Resources */,
 				E4B7B7861A793CF20022C5E0 /* FiraSans-UltraLight.ttf in Resources */,

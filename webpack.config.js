@@ -3,6 +3,7 @@ const path = require("path");
 const TerserPlugin = require('terser-webpack-plugin');
 
 const AllFramesAtDocumentStart = glob.sync("./Client/Frontend/UserContent/UserScripts/AllFrames/AtDocumentStart/*.js");
+const AllFramesAtDocumentStartSandboxed = glob.sync("./Client/Frontend/UserContent/UserScripts/Sandboxed/AllFrames/AtDocumentStart/*.js");
 const AllFramesAtDocumentEnd = glob.sync("./Client/Frontend/UserContent/UserScripts/AllFrames/AtDocumentEnd/*.js");
 const AllFramesAtDocumentEndSandboxed = glob.sync("./Client/Frontend/UserContent/UserScripts/Sandboxed/AllFrames/AtDocumentEnd/*.js");
 const MainFrameAtDocumentStart = glob.sync("./Client/Frontend/UserContent/UserScripts/MainFrame/AtDocumentStart/*.js");
@@ -29,6 +30,7 @@ if (path.basename(AllFramesAtDocumentEndSandboxed[0]) !== "__firefox__.js") {
 module.exports = {
   entry: {
     AllFramesAtDocumentStart: AllFramesAtDocumentStart,
+    AllFramesAtDocumentStartSandboxed: AllFramesAtDocumentStartSandboxed,
     AllFramesAtDocumentEnd: AllFramesAtDocumentEnd,
     AllFramesAtDocumentEndSandboxed: AllFramesAtDocumentEndSandboxed,
     MainFrameAtDocumentStart: MainFrameAtDocumentStart,
