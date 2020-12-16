@@ -632,10 +632,10 @@ class TabWebView: BraveWebView, MenuHelperInterface {
     }
 
     @objc func menuHelperFindInPage() {
-        evaluateJavaScript("getSelection().toString()") { result, _ in
+        evaluateSafeJavascript(functionName: "getSelection().toString", args: [], sandboxed: false, completion: { result, _ in
             let selection = result as? String ?? ""
             self.delegate?.tabWebView(self, didSelectFindInPageForSelection: selection)
-        }
+        })
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -667,10 +667,10 @@ class TabWebView: BraveWebView, MenuHelperInterface {
 class TabWebViewMenuHelper: UIView {
     @objc func swizzledMenuHelperFindInPage() {
         if let tabWebView = superview?.superview as? TabWebView {
-            tabWebView.evaluateJavaScript("getSelection().toString()") { result, _ in
+            tabWebView.evaluateSafeJavascript(functionName: "getSelection().toString", args: [], sandboxed: false, completion: { result, _ in
                 let selection = result as? String ?? ""
                 tabWebView.delegate?.tabWebView(tabWebView, didSelectFindInPageForSelection: selection)
-            }
+            })
         }
     }
 }
