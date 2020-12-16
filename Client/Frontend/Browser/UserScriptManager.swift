@@ -215,7 +215,7 @@ class UserScriptManager {
         let token = UserScriptManager.securityToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
         alteredSource = alteredSource.replacingOccurrences(of: "$<downloadManager>", with: "D\(token)", options: .literal)
         
-        return WKUserScript.createInDefaultContentWorld(source: alteredSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        return WKUserScript(source: alteredSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
     }()
     
     private let WindowRenderHelperScript: WKUserScript? = {
