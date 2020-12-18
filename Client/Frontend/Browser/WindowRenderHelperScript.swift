@@ -29,6 +29,6 @@ class WindowRenderHelperScript: TabContentScript {
     static func executeScript(for tab: Tab) {
         let token = UserScriptManager.securityToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
         
-        tab.webView?.evaluateJavaScript("W\(token).resizeWindow();", completionHandler: nil)
+        tab.webView?.evaluateSafeJavascript(functionName: "W\(token).resizeWindow", args: [], sandboxed: false, completion: nil)
     }
 }
