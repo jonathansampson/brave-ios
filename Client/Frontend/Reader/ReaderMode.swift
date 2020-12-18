@@ -282,7 +282,7 @@ class ReaderMode: TabContentScript {
     var style: ReaderModeStyle = DefaultReaderModeStyle {
         didSet {
             if state == ReaderModeState.active {
-                tab?.webView?.evaluateJavaScript("\(ReaderModeNamespace).setStyle(\(style.encode()))", completionHandler: { (object, error) -> Void in
+                tab?.webView?.evaluateSafeJavascript(functionName: "\(ReaderModeNamespace).setStyle", args: [style.encode()], sandboxed: false, completion: { (object, error) -> Void in
                     return
                 })
             }
