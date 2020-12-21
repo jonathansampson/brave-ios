@@ -27,7 +27,7 @@ extension WKUserScript {
 }
 
 public extension WKWebView {
-    private func generateJavascriptFunctionString(functionName: String, args: [Any], escapeArgs: Bool = true) -> String {
+    func generateJavascriptFunctionString(functionName: String, args: [Any], escapeArgs: Bool = true) -> String {
         let argsJS = args
           .map { escapeArgs ? "'\(String(describing: $0).escapeHTML())'" : "\($0)"}
           .joined(separator: ", ")
