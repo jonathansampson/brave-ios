@@ -8,6 +8,7 @@ import WebKit
 
 class WindowRenderHelperScript: TabContentScript {
     fileprivate weak var tab: Tab?
+    fileprivate let messageHandlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
     
     class func name() -> String {
         return "WindowRenderHelper"
@@ -18,7 +19,7 @@ class WindowRenderHelperScript: TabContentScript {
     }
     
     func scriptMessageHandlerName() -> String? {
-        return "windowRenderHelper"
+        return "WindowRenderHelper\(messageHandlerToken)"
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
