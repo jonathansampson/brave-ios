@@ -20,6 +20,8 @@ class PaymentRequestExtension: NSObject {
     fileprivate weak var rewards: BraveRewards?
     fileprivate var token: String
     
+    fileprivate let messageHandlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
+    
     fileprivate enum PaymentRequestErrors: String {
         case notSupportedError = "NotSupportedError"
         case abortError = "AbortError"
@@ -44,7 +46,7 @@ extension PaymentRequestExtension: TabContentScript {
     }
     
     func scriptMessageHandlerName() -> String? {
-        return PaymentRequestExtension.name()
+        return "\(PaymentRequestExtension.name())\(messageHandlerToken)"
     }
     
     private func sendPaymentRequestError(errorName: String, errorMessage: String) {
