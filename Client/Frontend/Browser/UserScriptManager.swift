@@ -197,7 +197,7 @@ class UserScriptManager {
         let handlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
 
         alteredSource = alteredSource.replacingOccurrences(of: "$<u2f>", with: "U\(token)", options: .literal)
-        alteredSource = alteredSource.replacingOccurrences(of: "$<handler>", with: "handler\(handlerToken)", options: .literal)
+        alteredSource = alteredSource.replacingOccurrences(of: "$<handler>", with: "U2F\(handlerToken)", options: .literal)
 
         return WKUserScript(source: alteredSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
     }()
@@ -209,11 +209,14 @@ class UserScriptManager {
         }
         var alteredSource: String = source
         
+        let messageHandlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
+        
         //Verify that the application itself is making a call to the JS script instead of other scripts on the page.
         //This variable will be unique amongst scripts loaded in the page.
         //When the script is called, the token is provided in order to access teh script variable.
         let token = UserScriptManager.securityToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
         alteredSource = alteredSource.replacingOccurrences(of: "$<downloadManager>", with: "D\(token)", options: .literal)
+        alteredSource = alteredSource.replacingOccurrences(of: "$<handler>", with: "ResourceDownloadManager\(messageHandlerToken)", options: .literal)
         
         return WKUserScript(source: alteredSource, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
     }()

@@ -34,6 +34,7 @@ struct DownloadedResourceResponse: Decodable {
 
 class ResourceDownloadManager: TabContentScript {
     fileprivate weak var tab: Tab?
+    fileprivate let messageHandlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
     
     init(tab: Tab) {
         self.tab = tab
@@ -44,7 +45,7 @@ class ResourceDownloadManager: TabContentScript {
     }
     
     func scriptMessageHandlerName() -> String? {
-        return "resourceDownloadManager"
+        return "ResourceDownloadManager\(messageHandlerToken)"
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
