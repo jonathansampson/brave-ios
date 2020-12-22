@@ -9,6 +9,7 @@ import BraveShared
 
 class FingerprintingProtection: TabContentScript {
     fileprivate weak var tab: Tab?
+    fileprivate let messageHandlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
     
     init(tab: Tab) {
         self.tab = tab
@@ -19,7 +20,7 @@ class FingerprintingProtection: TabContentScript {
     }
     
     func scriptMessageHandlerName() -> String? {
-        return "fingerprintingProtection"
+        return "FingerprintingProtection\(messageHandlerToken)"
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {

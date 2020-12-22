@@ -126,7 +126,10 @@ class UserScriptManager {
             log.error("Failed to load fingerprinting protection user script")
             return nil
         }
-        return WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+        let messageHandlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
+        var alteredSource = source
+        alteredSource = alteredSource.replacingOccurrences(of: "$<handler>", with: "FingerprintingProtection\(messageHandlerToken)", options: .literal)
+        return WKUserScript(source: alteredSource, injectionTime: .atDocumentStart, forMainFrameOnly: false)
     }()
     
     private let cookieControlUserScript: WKUserScript? = {
