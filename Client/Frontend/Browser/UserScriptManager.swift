@@ -106,10 +106,12 @@ class UserScriptManager {
             if let path = Bundle.main.path(forResource: name, ofType: "js"),
                 let source = try? NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String {
                 let wrappedSource = "(function() { const SECURITY_TOKEN = '\(UserScriptManager.securityToken)'; \(source) })()"
+                let alteredSource = wrappedSource.replacingOccurrences(of: "$handler", with: "\(messageHandlerTokenString)", options: .literal)
+
                 if sandboxed {
-                    return WKUserScript.createInDefaultContentWorld(source: wrappedSource, injectionTime: injectionTime, forMainFrameOnly: mainFrameOnly)
+                    return WKUserScript.createInDefaultContentWorld(source: alteredSource, injectionTime: injectionTime, forMainFrameOnly: mainFrameOnly)
                 } else {
-                    return WKUserScript(source: wrappedSource, injectionTime: injectionTime, forMainFrameOnly: mainFrameOnly)
+                    return WKUserScript(source: alteredSource, injectionTime: injectionTime, forMainFrameOnly: mainFrameOnly)
                 }
             }
             return nil

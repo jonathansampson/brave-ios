@@ -16,6 +16,9 @@ protocol FindInPageHelperDelegate: class {
 class FindInPageHelper: TabContentScript {
     weak var delegate: FindInPageHelperDelegate?
     fileprivate weak var tab: Tab?
+    
+    fileprivate let messageHandlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
+
 
     class func name() -> String {
         return "FindInPage"
@@ -26,7 +29,7 @@ class FindInPageHelper: TabContentScript {
     }
 
     func scriptMessageHandlerName() -> String? {
-        return "findInPageHandler"
+        return "findInPageHandler\(messageHandlerToken)"
     }
 
     func userContentController(_ userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {

@@ -221,6 +221,8 @@ class ReaderMode: TabContentScript {
     fileprivate weak var tab: Tab?
     var state: ReaderModeState = ReaderModeState.unavailable
     fileprivate var originalURL: URL?
+    
+    fileprivate let messageHandlerToken = UserScriptManager.messageHandlerToken.uuidString.replacingOccurrences(of: "-", with: "", options: .literal)
 
     class func name() -> String {
         return "ReaderMode"
@@ -231,7 +233,7 @@ class ReaderMode: TabContentScript {
     }
 
     func scriptMessageHandlerName() -> String? {
-        return "readerModeMessageHandler"
+        return "readerModeMessageHandler\(messageHandlerToken)"
     }
 
     fileprivate func handleReaderPageEvent(_ readerPageEvent: ReaderPageEvent) {

@@ -63,7 +63,7 @@ function find(query) {
   lastEscapedQuery = escapedQuery;
 
   if (!escapedQuery) {
-    webkit.messageHandlers.$<handler>.postMessage({ currentResult: 0, totalResults: 0 });
+    webkit.messageHandlers.findInPageHandler$handler.postMessage({ currentResult: 0, totalResults: 0 });
     return;
   }
 
@@ -83,7 +83,7 @@ function find(query) {
     activeHighlightIndex = -1;
 
     let totalResults = highlights.length;
-    webkit.messageHandlers.$<handler>.postMessage({ totalResults: totalResults });
+    webkit.messageHandlers.findInPageHandler$handler.postMessage({ totalResults: totalResults });
 
     findNext();
   });
@@ -149,9 +149,9 @@ function updateActiveHighlight() {
     activeHighlight.className = HIGHLIGHT_CLASS_NAME + " " + HIGHLIGHT_CLASS_NAME_ACTIVE;
     scrollToElement(activeHighlight, SCROLL_DURATION);
 
-    webkit.messageHandlers.$<handler>.postMessage({ currentResult: activeHighlightIndex + 1 });
+    webkit.messageHandlers.findInPageHandler$handler.postMessage({ currentResult: activeHighlightIndex + 1 });
   } else {
-    webkit.messageHandlers.$<handler>.postMessage({ currentResult: 0 });
+    webkit.messageHandlers.findInPageHandler$handler.postMessage({ currentResult: 0 });
   }
 }
 
